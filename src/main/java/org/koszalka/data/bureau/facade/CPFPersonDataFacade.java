@@ -15,7 +15,7 @@ import org.springframework.web.client.RestTemplate;
 @Component
 public class CPFPersonDataFacade {
 
-    @Value(value = "${data.bureau.data.bureau.person-data}")
+    @Value(value = "${data.bureau.person}")
     private String personDataDNS;
 
     private final RestTemplateClient restTemplateClient;

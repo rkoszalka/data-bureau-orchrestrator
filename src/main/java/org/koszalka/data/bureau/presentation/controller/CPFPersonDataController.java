@@ -1,11 +1,8 @@
 package org.koszalka.data.bureau.presentation.controller;
 
 import lombok.extern.slf4j.Slf4j;
-import org.koszalka.data.bureau.facade.CPFCreditScoreFacade;
 import org.koszalka.data.bureau.facade.CPFPersonDataFacade;
-import org.koszalka.data.bureau.presentation.api.CPFCreditScoreAPI;
 import org.koszalka.data.bureau.presentation.api.CPFPersonDataAPI;
-import org.koszalka.data.bureau.presentation.dto.CreditScoreDTO;
 import org.koszalka.data.bureau.presentation.dto.PersonDataDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

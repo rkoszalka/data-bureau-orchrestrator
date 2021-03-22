@@ -16,7 +16,7 @@ import org.springframework.web.client.RestTemplate;
 @Service
 public class CPFTransactionsFacade {
 
-    @Value(value = "${data.bureau.data.bureau.machine-learning}")
+    @Value(value = "${data.bureau.transactions}")
     private String transactionsDNS;
     private final RestTemplateClient restTemplateClient;
 

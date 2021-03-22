@@ -15,7 +15,7 @@ import org.springframework.web.client.RestTemplate;
 @Component
 public class CPFCreditScoreFacade {
 
-    @Value(value = "${data.bureau.credit-score}")
+    @Value(value = "${data.bureau.credit}")
     private String creditScoreDNS;
     private final RestTemplateClient restTemplateClient;
 
