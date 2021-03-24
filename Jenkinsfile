@@ -34,7 +34,8 @@ pipeline {
         }
         stage('Check running image') {
             steps {
-                sh './gradlew --no-daemon assemble docker dockerRun'
+                sh 'docker images'
+                sh 'docker ps'
             }
         }
     }
