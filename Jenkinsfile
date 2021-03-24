@@ -6,21 +6,16 @@ pipeline {
     }
 
     stages {
-        stage('Make Gradle Executable') {
-            steps {
-                sh "chmod +x gradlew"
-            }
-        }
         stage('Clean') {
             steps {
-                sh "./gradlew clean"
+                sh "./gradlew --no-daemon clean"
             }
         }
-//         stage('Test') {
-//             steps {
-//                 sh './gradlew test'
-//             }
-//         }
+        stage('Test') {
+            steps {
+                sh './gradlew test'
+            }
+        }
         stage('Clean All Containers') {
             steps {
                 script{
