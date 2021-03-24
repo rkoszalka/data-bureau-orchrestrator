@@ -13,7 +13,7 @@ pipeline {
         }
         stage('Clean') {
             steps {
-                sh "./gradlew clean"
+                sh "gradle clean"
             }
         }
 //         stage('Test') {
@@ -23,8 +23,11 @@ pipeline {
 //         }
         stage('Clean All Containers') {
             steps {
+                def doc_containers = sh(returnStdout: true, script: 'docker container ps -aq').replaceAll("\n", " ")
+                if (doc_containers) {
+                    sh "docker stop ${doc_containers}"
+                }
                 sh 'docker container kill $(docker ps -q)'
-                sh 'docker rm $(docker ps -q)'
             }
         }
         stage('Deploy container') {
