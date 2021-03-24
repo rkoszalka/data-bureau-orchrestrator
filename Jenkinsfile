@@ -24,7 +24,7 @@ pipeline {
         stage('Clean All Containers') {
             steps {
                 sh 'docker ps -a -q --filter "name=/bureau-orchestrator"'
-                sh "docker rmi \$(docker images '/bureau-orchestrator' -a -q)
+                sh "docker rmi \$(docker images '/bureau-orchestrator' -a -q)"
 "
             }
         }
