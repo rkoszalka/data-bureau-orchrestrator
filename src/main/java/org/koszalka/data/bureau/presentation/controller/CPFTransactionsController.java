@@ -2,6 +2,7 @@ package org.koszalka.data.bureau.presentation.controller;
 
 import lombok.extern.slf4j.Slf4j;
 import org.koszalka.data.bureau.facade.CPFTransactionsFacade;
+import org.koszalka.data.bureau.kafka.event.TransactionEvent;
 import org.koszalka.data.bureau.presentation.api.CPFTransactionsAPI;
 import org.koszalka.data.bureau.presentation.dto.TransactionsDTO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,13 +34,18 @@ public class CPFTransactionsController implements CPFTransactionsAPI {
      * @return creditScoreDTO.
      */
     @Override
-    public ResponseEntity<TransactionsDTO> getCPFTransactions(@RequestParam String cpfNumber) {
+    public ResponseEntity<TransactionsDTO> getCPFTransactions(@RequestParam String cpfNumber, @RequestParam String searchType,
+                                                              @RequestParam String transactionValue) {
         if (!StringUtils.hasText(cpfNumber)) {
             log.error("M=getCPFCreditScore, message=CPF number is required");
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
         try {
-            ResponseEntity<TransactionsDTO> response = cpfTransactionsFacade.getTransactions(cpfNumber);
+            TransactionEvent event = new TransactionEvent();
+            event.setTransactionValue(transactionValue);
+            event.setCpfNumber(cpfNumber);
+            event.setSearchType(searchType);
+            ResponseEntity<TransactionsDTO> response = cpfTransactionsFacade.getTransactions(event);
             if (Objects.isNull(response)) {
                 log.error("M=.getCPFCreditScore, message=Credit score not found for {}", cpfNumber);
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);

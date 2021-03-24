@@ -29,7 +29,8 @@ public interface CPFTransactionsAPI {
             @ApiResponse(code = 500, message = "Server error.")
     })
     @GetMapping(produces = "application/json")
-    ResponseEntity<TransactionsDTO> getCPFTransactions(@PathVariable String cpfNumber);
+    ResponseEntity<TransactionsDTO> getCPFTransactions(@RequestParam String cpfNumber, @RequestParam String searchType,
+                                                       @RequestParam String transactionValue);
 
 
 }
