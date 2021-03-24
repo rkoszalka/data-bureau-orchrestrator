@@ -23,7 +23,7 @@ pipeline {
 //         }
         stage('Deploy container') {
             steps {
-                sh './gradlew assemble docker dockerRun'
+                sh './gradlew --no-daemon assemble docker dockerRun'
             }
         }
     }
