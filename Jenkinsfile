@@ -6,17 +6,16 @@ pipeline {
     }
 
     stages {
-        stage('Clean') {
-            sh "gradle clean"
-        }
         stage('Make Gradle Executable') {
-            sh "chmod +x gradlew"
+            steps {
+                sh "chmod +x gradlew"
+            }
         }
-//         stage('Build') {
-//             steps {
-//                 sh './gradlew build'
-//             }
-//         }
+        stage('Clean') {
+            steps {
+                sh "gradle clean"
+            }
+        }
 //         stage('Test') {
 //             steps {
 //                 sh './gradlew test'
