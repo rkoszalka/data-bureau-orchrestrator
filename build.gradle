@@ -2,6 +2,8 @@ plugins {
 	id 'org.springframework.boot' version '2.4.4'
 	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
 	id 'java'
+	id 'com.palantir.docker' version '0.25.0'
+	id 'com.palantir.docker-run' version '0.25.0'
 }
 
 group = 'org.koszalka.data'
@@ -31,4 +33,19 @@ dependencies {
 
 test {
 	useJUnitPlatform()
+}
+
+
+String imageName = "rkoszalka/data-bureau-orchestrator:$version"
+docker {
+	name imageName
+	files "build/libs/${bootJar.archiveFileName.get()}"
+	buildArgs([JAR_FILE: bootJar.archiveFileName.get()])
+}
+
+dockerRun {
+	name project.name
+	image imageName
+	ports '8090:8090'
+	clean true
 }
