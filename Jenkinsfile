@@ -24,7 +24,13 @@ pipeline {
         stage('Clean All Containers') {
             steps {
                 sh 'docker ps -a -q --filter "name=/bureau-orchestrator"'
-                sh 'docker image prune -a --force --filter "label=source=data-bureau-orchestrator"'
+                sh """
+                  docker ps -a \
+                    | awk '{ print \$1,\$2 }' \
+                    | grep /bureau-orchestrator \
+                    | awk '{print \$1 }' \
+                    | xargs -I {} docker rm -f {}
+                  """
             }
         }
         stage('Deploy container') {
