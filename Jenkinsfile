@@ -24,7 +24,7 @@ pipeline {
         stage('Clean All Containers') {
             steps {
                 sh 'docker ps -a -q --filter "name=/bureau-orchestrator"'
-                sh 'docker image prune -a --force --filter "name=/bureau-orchestrator"'
+                sh 'docker image prune -a --force --filter "label=source=data-bureau-orchestrator"'
             }
         }
         stage('Deploy container') {
