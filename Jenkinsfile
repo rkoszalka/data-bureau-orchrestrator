@@ -5,12 +5,12 @@ pipeline {
         jdk 'java11'
     }
 
-    stages {
-        stage('Build') {
-            steps {
-                sh './gradlew build'
-            }
-        }
+//     stages {
+//         stage('Build') {
+//             steps {
+//                 sh './gradlew build'
+//             }
+//         }
 //         stage('Test') {
 //             steps {
 //                 sh './gradlew test'
