@@ -6,24 +6,24 @@ pipeline {
     }
 
     stages {
-        stage('Build') {
-            steps {
-                sh './gradlew assemble'
-            }
-        }
-        stage('Test') {
-            steps {
-                sh './gradlew test'
-            }
-        }
-        stage('Docker image') {
-            steps {
-                sh './gradlew assemble docker'
-            }
-        }
+//         stage('Build') {
+//             steps {
+//                 sh './gradlew assemble'
+//             }
+//         }
+//         stage('Test') {
+//             steps {
+//                 sh './gradlew test'
+//             }
+//         }
+//         stage('Docker image') {
+//             steps {
+//                 sh './gradlew assemble docker'
+//             }
+//         }
         stage('Deploy container') {
             steps {
-                sh './gradlew assemble docker dockerRun'
+                sh 'sudo ./gradlew assemble docker dockerRun'
             }
         }
     }
