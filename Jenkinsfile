@@ -22,11 +22,12 @@ pipeline {
 //                 sh './gradlew test'
 //             }
 //         }
-//         stage('Docker image') {
-//             steps {
-//                 sh './gradlew assemble docker'
-//             }
-//         }
+        stage('Clean All Containers') {
+            steps {
+                sh 'docker container kill $(docker ps -q)'
+                sh 'docker rm $(docker ps -q)'
+            }
+        }
         stage('Deploy container') {
             steps {
                 sh './gradlew --no-daemon assemble docker dockerRun'
