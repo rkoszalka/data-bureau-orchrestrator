@@ -6,11 +6,11 @@ pipeline {
     }
 
     stages {
-//         stage('Build') {
-//             steps {
-//                 sh './gradlew assemble'
-//             }
-//         }
+        stage('Build') {
+            steps {
+                sh './gradlew build'
+            }
+        }
 //         stage('Test') {
 //             steps {
 //                 sh './gradlew test'
@@ -23,7 +23,7 @@ pipeline {
 //         }
         stage('Deploy container') {
             steps {
-                sh 'sudo ./gradlew assemble docker dockerRun'
+                sh './gradlew assemble docker dockerRun'
             }
         }
     }
