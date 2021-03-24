@@ -5,7 +5,7 @@ pipeline {
         jdk 'java11'
     }
 
-//     stages {
+    stages {
 //         stage('Build') {
 //             steps {
 //                 sh './gradlew build'
