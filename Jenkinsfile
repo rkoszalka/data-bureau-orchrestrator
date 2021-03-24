@@ -1,7 +1,5 @@
 pipeline {
-    agent {
-        label 'java11'
-    }
+    agent any
 
     tools {
         jdk 'java11'
