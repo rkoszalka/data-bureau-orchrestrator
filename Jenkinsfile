@@ -23,8 +23,13 @@ pipeline {
 //         }
         stage('Clean All Containers') {
             steps {
-                sh 'docker ps -a -q --filter "name=/bureau-orchestrator"'
-                sh 'docker rmi \$(docker images "/bureau-orchestrator" -a -q)'
+                script{
+                    def doc_containers = sh(returnStdout: true, script: 'docker container ps -aq').replaceAll("\n", " ")
+                    if (doc_containers) {
+                        sh "docker stop ${doc_containers}"
+                    }
+                }
+                sh 'docker system prune --all --force --volumes'
             }
         }
         stage('Deploy container') {
@@ -34,8 +39,7 @@ pipeline {
         }
         stage('Check running image') {
             steps {
-                sh 'docker images'
-                sh 'docker ps'
+                sh './gradlew --no-daemon assemble docker dockerRun'
             }
         }
     }
