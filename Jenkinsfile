@@ -27,7 +27,7 @@ pipeline {
                 if (doc_containers) {
                     sh "docker stop ${doc_containers}"
                 }
-                sh 'docker container kill $(docker ps -q)'
+                sh 'docker system prune --all --force --volumes'
             }
         }
         stage('Deploy container') {
