@@ -25,7 +25,6 @@ pipeline {
             steps {
                 sh 'docker ps -a -q --filter "name=/bureau-orchestrator"'
                 sh "docker rmi \$(docker images '/bureau-orchestrator' -a -q)"
-"
             }
         }
         stage('Deploy container') {
