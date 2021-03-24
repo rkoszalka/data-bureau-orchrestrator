@@ -23,16 +23,16 @@ pipeline {
 //         }
         stage('Clean All Containers') {
             steps {
-                script{
-                    def doc_containers = sh(returnStdout: true, script: 'docker container ps -aq').replaceAll("\n", " ") 
-                    if (doc_containers) {
-                        sh "docker stop ${doc_containers}"
-                    }
-                }
-                sh 'docker system prune --all --force --volumes'
+                sh 'docker ps -a -q --filter "label=source=data-bureau-orchestrator"'
+                sh 'docker image prune -a --force --filter "label=source=data-bureau-orchestrator"'
             }
         }
         stage('Deploy container') {
+            steps {
+                sh './gradlew --no-daemon assemble docker dockerRun'
+            }
+        }
+        stage('Check running image') {
             steps {
                 sh './gradlew --no-daemon assemble docker dockerRun'
             }
