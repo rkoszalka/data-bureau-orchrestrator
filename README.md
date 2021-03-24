@@ -91,17 +91,10 @@ have the minimum startup time required. But since its just a showcase I decided 
 ## Continuous Integration
 
 ###### Few considerations
-- Jenkins Job available at: http://ec2-34-234-172-15.compute-1.amazonaws.com:8080/job/data-bureau/
-- It is not running on TLS because we do not have a top level domain to issue a ssl certificate;
+- Jenkins Job available at: https://jenkins.mtccoin.cash/login?from=%2F
 - For user/password just send me a message or email (information available on my GitHub profile);
 
 ###### Jenkinsfile
-
-I wrote the Jenkinsfile based upon a multi module project, this is just to keep all the backend code available
-at one repository, they will be dockerized and run as a nano-service running on a specific port.
-
-If the system were designed for production and if a better implementation flow 
-were necessaryI would create one repository for each nano-service and also one Jenkins job for each one of them.
 
 ## Tests
 
